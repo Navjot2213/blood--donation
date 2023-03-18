@@ -1,4 +1,5 @@
 import { useState, useEffect, Fragment } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import './App.css'
 
@@ -7,8 +8,8 @@ import Home from './pages/Home/Home';
 import Search from './pages/Search/Search';
 import Profile from './pages/Profile/Profile';
 import Navbar from './component/Navbar/Navbar';
-import { BrowserRouter, Route, RouterProvider, Routes } from 'react-router-dom';
 import Footer from './component/Footer/Footer';
+import Login from './pages/Login/Login';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -39,10 +40,15 @@ function App() {
         <Routes>
             <Route path="/home/*" element={<Home {...props}/>}/>
             <Route path="/search/*" element={<Search {...props}/>}/>
+
             <Route path="*" element={<Error404/>}/>
-            {isLogin && 
+            {isLogin ?
               <Fragment>
                 <Route path="/profile/*" element={<Profile {...props}/>}/>
+              </Fragment>
+              :
+              <Fragment>
+                <Route path="/login/*" element={<Login {...props}/>}/>
               </Fragment>
             }
         </Routes>
