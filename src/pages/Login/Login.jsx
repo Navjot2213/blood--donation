@@ -8,14 +8,13 @@ import UserLogin from './subComponenets/UserLogin'
 
 export default function Login() {
   return (
-    <Fragment>
-        <h1>hello</h1>
-        <Routes>
-            <Route path="/" Element={ <UserLogin />}/>
-            <Route path="/admin-login" Element={ <AdminLogin />}/>
-            <Route path="/signup" Element={ <Signup />}/>
-            <Route path="*" Element={ <Error404 />}/>
-        </Routes>
-    </Fragment>
+    <section className="login-page">
+    <Routes>
+      <Route path="*" element={<UserLogin/>} />        
+      <Route path="/signup" element={<Signup />} />
+    </Routes>
+      
+</section>
+
   )
 }

@@ -16,7 +16,7 @@ export default function Nav({ isLogin }) {
         />
 
       <div className="logo">
-        <Link to="/"><img src='./' alt="logo"/></Link>
+        <Link to="/"><img src='/images/blood-donation.jpg' alt="logo"/></Link>
       </div>
 
       <ul onClick={inputSelected}>       
