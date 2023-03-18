@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect, Fragment } from 'react'
+import axios from 'axios';
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import Error404 from './pages/404Error/Error404';
+import Home from './pages/Home/Home';
+import Search from './pages/Search/Search';
+import Profile from './pages/Profile/Profile';
+import Navbar from './component/Navbar/Navbar';
+import { BrowserRouter, Route, RouterProvider, Routes } from 'react-router-dom';
+import Footer from './component/Footer/Footer';
 
+function App() {
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      const token = localStorage.getItem("tokenStore");
+      if (!token) return setIsLogin(false);
+      try {
+        const verified = await axios.get("/user-auth/verify", {
+          headers: { Authorization: token },
+        });
+        verified.data ? setIsLogin(verified.data) :  localStorage.clear();
+      } catch (error) {
+        console.log(error)
+        localStorage.clear();
+      };
+    }
+    checkLogin();
+  }, []);
+
+  const props = {
+    isLogin
+  } 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <BrowserRouter>
+      <Navbar {...props} />
+        <Routes>
+            <Route path="/home/*" element={<Home {...props}/>}/>
+            <Route path="/search/*" element={<Search {...props}/>}/>
+            <Route path="*" element={<Error404/>}/>
+            {isLogin && 
+              <Fragment>
+                <Route path="/profile/*" element={<Profile {...props}/>}/>
+              </Fragment>
+            }
+        </Routes>
+      <Footer {...props}/>
+    </BrowserRouter >
+  );
 }
 
 export default App
