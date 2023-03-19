@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
-export default function Nav({ isLogin }) {
+export default function Nav({ isLogin, isAdminLogin, setIsLogin, setIsAdminLogin }) {
 
   const inputSelected = ()=>{
     document.getElementById("slidebar-checkbox").checked =false;
@@ -22,12 +22,17 @@ export default function Nav({ isLogin }) {
       <ul onClick={inputSelected}>       
        {isLogin?<>
 
-        <li><Link to="/">
-          <p>Home</p>
-        </Link></li>
-        <li><Link to="/profile">
-          <p>Profile</p>
-        </Link></li>
+          <li><Link to="/">
+            <p>Home</p>
+          </Link></li>
+          <li><Link to="/profile">
+            <p>Profile</p>
+          </Link></li>
+          <li className="signup" onClick={()=>{
+            setIsAdminLogin(false)
+            setIsLogin(false)
+            localStorage.clear()
+          }}><Link to="/dd">logout</Link></li>
         </>
         :
         <> 

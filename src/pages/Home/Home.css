@@ -1,0 +1,82 @@
+.home-page{
+    padding: 1rem;
+}
+#content a {
+    text-decoration: none;
+    color: #545454;
+}
+
+.camp-card {
+    position: relative;
+    width: 320px;
+    height: 250px;
+    background-color: #fff;
+    border-radius: .4rem;
+    overflow: hidden;
+    box-shadow: 0 3rem 6rem rgba(0, 0, 0, .1);
+    cursor: pointer;
+    transition: .2s;
+    padding: 1.5rem;
+}
+
+.camp-card img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.camp-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
+.camp-card p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.camp-card .card-footer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: calc(100% - 3rem);
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1rem;
+}
+
+.camp-card .card-footer .strike-amount {
+    text-decoration: line-through;
+    color: rgb(130, 130, 130);
+}
+
+.camp-card .card-footer .amount {
+    font-weight: bolder;
+    color: rgb(130, 130, 130);
+}
+
+.camp-card .card-footer button {
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    background-color: #fff;
+    color: #545454;
+    border: 1px solid #545454;
+    border-radius: .4rem;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.camp-card .card-footer button span {
+    margin-left: 1rem;
+    transition: .2s;
+}
+
+.camp-card .card-footer button:hover,
+.camp-card .card-footer button:active {
+    color: #fff;
+    background-color: #e2665e;
+    border: 1px solid #e2665e;
+}

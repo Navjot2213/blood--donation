@@ -10,9 +10,11 @@ import Profile from './pages/Profile/Profile';
 import Navbar from './component/Navbar/Navbar';
 import Footer from './component/Footer/Footer';
 import Login from './pages/Login/Login';
+import Admin from './pages/Admin/Admin';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
+  const [isAdminLogin, setIsAdminLogin] = useState(false);
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -32,13 +34,16 @@ function App() {
   }, []);
 
   const props = {
-    isLogin
+    isLogin,
+    setIsLogin,
+    isAdminLogin,
+    setIsAdminLogin
   } 
   return (
     <BrowserRouter>
       <Navbar {...props} />
         <Routes>
-            <Route path="/home/*" element={<Home {...props}/>}/>
+            <Route path="*" element={<Home {...props}/>}/>
             <Route path="/search/*" element={<Search {...props}/>}/>
 
             <Route path="*" element={<Error404/>}/>
@@ -49,6 +54,12 @@ function App() {
               :
               <Fragment>
                 <Route path="/login/*" element={<Login {...props}/>}/>
+              </Fragment>
+            }
+            {
+              isAdminLogin && 
+              <Fragment>
+                <Route path="/admin/*" element={<Admin {...props}/>}/>
               </Fragment>
             }
         </Routes>

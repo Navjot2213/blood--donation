@@ -13,9 +13,9 @@ header {
 
 header .logo img {
     position: absolute;
-    height: 50px;
+    height: 70px;
     left: 1rem;
-    top: 1rem;
+    top: -0.2rem;
 }
 
 header ul {

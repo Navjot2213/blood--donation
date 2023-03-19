@@ -24,14 +24,18 @@ export default function Footer({isLogin}){
             </a></li>
         </ul>
         <ul className="menu">
-            { isLogin && <>
+            { isLogin ? <>
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/profile">Profile</Link></li>
+                </>
+                :<>
+                <li><Link to="/login">Login</Link></li>
+                <li><Link to="/login/admin">Admin-Login</Link></li>
                 </>
             }
         </ul>
             <div className="footer-copyright">
-                <p>© 2018-{currentYear} <a href="https://www.turnip.co.in/" target="_blank">Turnip Innovations Private Limited</a><br />All Rights Reserved.</p>
+                <p>© 2018-{currentYear} All Rights Reserved.</p>
             </div>
     </footer>
     );
