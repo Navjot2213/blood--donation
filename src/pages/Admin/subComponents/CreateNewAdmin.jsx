@@ -26,7 +26,7 @@ export default function CreateNewAdmin() {
 
     return (
     <div className="createCamp">
-        <h2>Create Camp</h2>
+        <h2>Create New Admin</h2>
             <form onSubmit={onSubmit} >
                 <label htmlFor='campName'>Camp Name</label>
                 <input
