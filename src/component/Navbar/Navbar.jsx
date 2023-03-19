@@ -19,12 +19,11 @@ export default function Nav({ isLogin, isAdminLogin, setIsLogin, setIsAdminLogin
         <Link to="/"><img src='/images/blood-donation.jpg' alt="logo"/></Link>
       </div>
 
-      <ul onClick={inputSelected}>       
-       {isLogin?<>
-
+      <ul onClick={inputSelected}>
           <li><Link to="/">
-            <p>Home</p>
+              <p>Home</p>
           </Link></li>
+       {isLogin?<>
           <li><Link to="/profile">
             <p>Profile</p>
           </Link></li>
@@ -32,7 +31,7 @@ export default function Nav({ isLogin, isAdminLogin, setIsLogin, setIsAdminLogin
             setIsAdminLogin(false)
             setIsLogin(false)
             localStorage.clear()
-          }}><Link to="/dd">logout</Link></li>
+          }}><Link to="/login">logout</Link></li>
         </>
         :
         <> 

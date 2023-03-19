@@ -14,7 +14,10 @@ export default function Home({ isLogin }) {
     const load =  async ()=>{
       try {
         const response = await axios.get('https://asia-south1-team-decrypters.cloudfunctions.net/camp-api/getCampsLists')
-        setCamps(response.data);
+        const filtered = response.data.filter( (value)=> {
+          return (new Date(value.endTime) - Date.now()) > 1;
+        })
+        setCamps(filtered);
       } catch (error) {
         console.log(error)
       }
@@ -29,8 +32,10 @@ export default function Home({ isLogin }) {
   }
   return (
     <section className="home-page">
+      <img className="home-banner" src="/images/banner.jpg" alt='Banner Image'/>
+      <h2>Active Registerd Blood Donations Camps</h2>
       <section id="camps">
-      { camps.map( camp => {
+      { camps.slice(0,4).map( camp => {
             const {  _id, campName, location, startTime, endTime } = camp;
             const RemaingsDay =  Math.floor( (new Date(endTime) - Date.now())/86400000 ) + 1;
             return (
@@ -48,15 +53,10 @@ export default function Home({ isLogin }) {
               </div>
             );
           })
-        }
+        }        
       </section>
-      
+      <button className='btn_more'>Click here for More Information</button>
 
-{/*       <form>
-        <select name="location" id="location">
-          {bloodOptions.map( ({value , label})=> <option value={value}>{label}</option> )}
-        </select>
-      </form> */}
     </section>
 
   )

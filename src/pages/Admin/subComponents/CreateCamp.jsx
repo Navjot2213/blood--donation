@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, {useState, } from 'react'
 
 export default function CreateCamp() {
@@ -7,18 +8,18 @@ export default function CreateCamp() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
+        const formData = new FormData(e.target);
         try {
           const token = localStorage.getItem("Admintoken");
           setDisabled(true)
-          const res = await axios.put("/user-auth/update-password", Object.fromEntries(formData.entries() ) ,{
+          const res = await axios.post("https://asia-south1-team-decrypters.cloudfunctions.net/camp-api/createCamp", Object.fromEntries(formData.entries()) ,{
                 headers: { Authorization: token },
           });
           e.target.reset()
           res.status < 300 ? setSucc(res.data.msg): setErr(res.data.msg);
         } catch (err) {
           setDisabled(false)
-          err.response.data.msg && setErr(err.response.data.msg);
+           console.log(err.response);
         }
       };
   
@@ -43,7 +44,6 @@ export default function CreateCamp() {
                     id="location"
                     placeholder="Enter Camp Location"
                     required
-                    minlength="8"
                 />
 
                 <label htmlFor='startTime'>Start Date</label>

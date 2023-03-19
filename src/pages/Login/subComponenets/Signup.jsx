@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link , useNavigate} from 'react-router-dom'
 
 export default function Signup() {
   const [genderOptions] = useState([
@@ -25,6 +25,7 @@ export default function Signup() {
   ])
   const [err, setErr] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const Navigate =  useNavigate();
 
   const onSubmit = async (e)=>{
     e.preventDefault()
@@ -36,6 +37,7 @@ export default function Signup() {
       alert("Details Saved Successfully")
       setIsLoading(false)
       setErr("")
+      Navigate('/login')
     } catch (error) {
       setIsLoading(false)
       setErr(error.response.data.msg)
