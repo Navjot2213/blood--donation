@@ -26,7 +26,7 @@ export default function CreateCamp() {
 
     return (
     <div className="createCamp">
-        <h2>Create Camp</h2>
+        <h2>Create New Camp</h2>
             <form onSubmit={onSubmit} >
                 <label htmlFor='campName'>Camp Name</label>
                 <input
