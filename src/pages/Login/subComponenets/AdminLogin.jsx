@@ -27,7 +27,7 @@ export default function AdminLogin({ setIsAdminLogin }) {
       <form className='login' onSubmit={onSubmit}>
       <h1>Admin Login</h1>
         <label htmlFor="email">Email</label>
-        <input type="text" name="email" id="email" required />
+        <input type="email" name="email" id="email" required />
         <label htmlFor="password">Password</label>
         <input type="password" name="password" id="password" required/>
         <input type="submit" value="Login" />

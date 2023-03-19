@@ -5,12 +5,13 @@ import './App.css'
 
 import Error404 from './pages/404Error/Error404';
 import Home from './pages/Home/Home';
-import Search from './pages/Search/Search';
 import Profile from './pages/Profile/Profile';
 import Navbar from './component/Navbar/Navbar';
 import Footer from './component/Footer/Footer';
 import Login from './pages/Login/Login';
 import Admin from './pages/Admin/Admin';
+import Camp from './pages/Camps/Camps';
+import ContactDonors from './pages/ContactDonors/ContactDonors';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -18,10 +19,10 @@ function App() {
 
   useEffect(() => {
     const checkLogin = async () => {
-      const token = localStorage.getItem("tokenStore");
+      const token = localStorage.getItem("token");
       if (!token) return setIsLogin(false);
       try {
-        const verified = await axios.get("/user-auth/verify", {
+        const verified = await axios.get("https://asia-south1-team-decrypters.cloudfunctions.net/donor-api/verifiedToken", {
           headers: { Authorization: token },
         });
         verified.data ? setIsLogin(verified.data) :  localStorage.clear();
@@ -43,10 +44,9 @@ function App() {
     <BrowserRouter>
       <Navbar {...props} />
         <Routes>
-            <Route path="*" element={<Home {...props}/>}/>
-            <Route path="/search/*" element={<Search {...props}/>}/>
-
-            <Route path="*" element={<Error404/>}/>
+            <Route index element={<Home {...props}/>}/>
+            <Route path="/camps/*" element={<Camp {...props}/>}/>
+            <Route path="/contact-donors/*" element={<ContactDonors {...props}/>}/>
             {isLogin ?
               <Fragment>
                 <Route path="/profile/*" element={<Profile {...props}/>}/>
@@ -62,6 +62,7 @@ function App() {
                 <Route path="/admin/*" element={<Admin {...props}/>}/>
               </Fragment>
             }
+            <Route path="*" element={<Error404/>}/>
         </Routes>
       <Footer {...props}/>
     </BrowserRouter >

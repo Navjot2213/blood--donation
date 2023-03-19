@@ -23,6 +23,12 @@ export default function Nav({ isLogin, isAdminLogin, setIsLogin, setIsAdminLogin
           <li><Link to="/">
               <p>Home</p>
           </Link></li>
+          <li><Link to="/camps">
+              <p>Camps</p>
+          </Link></li>          
+          <li><Link to="/contact-donors">
+              <p>Contact-Donors</p>
+          </Link></li>
        {isLogin?<>
           <li><Link to="/profile">
             <p>Profile</p>

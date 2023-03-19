@@ -1,14 +1,17 @@
-.home-page h2 {
+.camp-page {
+    padding: 1rem;
+}
+.camp-page h2 {
     text-align: center;
     text-decoration: underline;
 }
 #activeCamp{
     padding: 1rem;
 }
-.home-banner {
-    width: 100%
+#filters{
+    max-width: 678px;
+    margin: auto;
 }
-
 #camps {
     display: flex;
     flex-wrap: wrap;

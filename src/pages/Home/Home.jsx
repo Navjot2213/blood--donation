@@ -3,9 +3,6 @@ import React, { Fragment, useState, useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import './Home.css'
 
-import Error404 from '../404Error/Error404'
-
-
 export default function Home({ isLogin }) {
   const Navigate = useNavigate();
   const [camps, setCamps] = useState([]);
@@ -28,23 +25,25 @@ export default function Home({ isLogin }) {
   const registerCamp = (campId) => async()=>{
     if(!isLogin) {
       return confirm("Please Login First Before Registarting in Camp") ? Navigate('/login'): null;
-    }console.log(campId)
+    }
+    console.log(campId)
   }
   return (
     <section className="home-page">
       <img className="home-banner" src="/images/banner.jpg" alt='Banner Image'/>
+      <section id="activeCamp">
       <h2>Active Registerd Blood Donations Camps</h2>
-      <section id="camps">
+      <div id="camps">
       { camps.slice(0,4).map( camp => {
             const {  _id, campName, location, startTime, endTime } = camp;
-            const RemaingsDay =  Math.floor( (new Date(endTime) - Date.now())/86400000 ) + 1;
             return (
-              <div id="content">
+              <div key={_id} id="content">
               <div onClick={ registerCamp(_id)} className="camp-card">
                   <div className="content">
                     <h3>{campName}</h3>
                     <p>Location: {location}</p>
-                    <p>End In: {RemaingsDay} Days</p>
+                    <p>Start Date: {new Date(startTime).toLocaleDateString('en-IN')}</p>
+                    <p>End Date: {new Date(endTime).toLocaleDateString('en-IN')}</p>
                     <div className="card-footer">
                       <button>Be Helping One <span>&rarr;</span></button>
                     </div>
@@ -54,9 +53,9 @@ export default function Home({ isLogin }) {
             );
           })
         }        
+      </div>
+      <button className='btn_more' onClick={ ()=> Navigate('/camps')}>Click here for More Information</button>
       </section>
-      <button className='btn_more'>Click here for More Information</button>
-
     </section>
 
   )

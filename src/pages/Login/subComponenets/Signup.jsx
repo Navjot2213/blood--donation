@@ -19,9 +19,9 @@ export default function Signup() {
     {value: "O-", label: "O-"},
   ]);
   const [medicalOptions] = useState([
+    {value: null, label: "None"},
     {value: "AIDS", label: "AIDS"},
     {value: "DAIBETES", label: "DAIBETES"},
-    {value: null, label: "None"},
   ])
   const [err, setErr] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -29,9 +29,12 @@ export default function Signup() {
 
   const onSubmit = async (e)=>{
     e.preventDefault()
+    const formData = new FormData(e.target)
+    const confirmPassword = formData.get('confirmPassword')
+    const password= formData.get('password')
+    if ( confirmPassword !== password) return setErr("Confirm Password not Match")
     setIsLoading(true)
     if(isLoading) return 
-    const formData = new FormData(e.target)
     try {
       const response = await axios.post('https://asia-south1-team-decrypters.cloudfunctions.net/donor-api/registerUser', Object.fromEntries(formData.entries()))
       alert("Details Saved Successfully")
@@ -46,13 +49,12 @@ export default function Signup() {
 
   return (
     <Fragment>
-      
       <form className='login' onSubmit={onSubmit}>
       <h1>Sign-up</h1>
         <label htmlFor="name">Name</label>
         <input type="text" name="name" id="name" required/>
         <label htmlFor="email">Email</label>
-        <input type="text" name="email" id="email" required />
+        <input type="email" name="email" id="email" required />
         <label htmlFor="bloodGroup">BloodGroup</label>
         <select name="bloodGroup" id="bloodGroup">
           {bloodOptions.map( ({value , label})=> <option value={value}>{label}</option> )}
