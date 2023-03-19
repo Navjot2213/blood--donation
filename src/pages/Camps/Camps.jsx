@@ -35,8 +35,16 @@ export default function Camps({ isLogin }) {
     if(!isLogin) {
       return confirm("Please Login First Before Registarting in Camp") ? Navigate('/login'): null;
     }
-    console.log(campId)
-    console.log(locations)
+    const token = localStorage.getItem('token')
+    try {
+        const response = await axios.patch("https://asia-south1-team-decrypters.cloudfunctions.net/camp-api/donorRegisterted/"+ campId, {}, {
+            headers: { Authorization : token}
+        })
+        alert(response.data.msg)
+    } catch (error) {
+        alert(error.response.data.msg)
+    }
+
   }
 
   const onSelect = (e)=>{

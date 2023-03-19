@@ -1,4 +1,6 @@
 #contact-donors{
+    min-width: 550px;
+    overflow-x: scroll;
     padding: 1rem;
 }
 #contact-donors h2 {
@@ -53,3 +55,41 @@
     border: 1px solid #F1F1F1;
     border-radius: 5px;
   }
+
+#popup{
+    display: none;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    top:0;
+    left: 0;
+    z-index: 5;
+    background-color: #F8F8F8;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#popup form{
+margin: auto;
+max-width: 678px;
+}
+
+#popup form h2 {
+    margin-bottom: 1rem;
+}
+#popup form textarea{
+    width: 100%;
+    height: 150px;
+}
+
+#popup p{
+    margin: 2rem 0;
+    text-decoration: underline;
+}
+
+#popup p:hover,
+#popup p:focus{
+    color: #7D7D7D;
+    text-decoration: dotted;
+}

@@ -7,15 +7,14 @@ export default function Certificate() {
     useEffect(() => {
       const load = async ()=>{
         const token = localStorage.getItem("token");
-        const res = await axios.get(`/user-auth/certificates`, {
+        const res = await axios.get(`https://asia-south1-team-decrypters.cloudfunctions.net/camp-api/getRegisteredCamps`, {
          headers: { Authorization: token },
         });
-        setRegisterdCamps(res.data.result); 
+        setRegisterdCamps(res.data); 
       }
       load();
     }, [])
     
-
     return (
     <div className="registered-camp">
         <h1>Registerd Camps</h1>
@@ -24,25 +23,25 @@ export default function Certificate() {
                 <h3 style={{ textAlign: "center", color: "#e2665e" }}>You haven't Registerd for any Blood Donation Camp.</h3>
             </>
             :
-            registerdCamps.map( certi =>{
-                const { webinar_name, certificate_id, url, timestamp } = certi;
-                const certiDirect = "http://turnip.co.in/Certificates/" + url ;
-                const certiLink = "http://turnip.co.in/Certificates/" + url + "/" + certificate_id + ".png";
-                const date = new Date(timestamp);
-                const DD = date.getDate();
-                const MM = date.getMonth();
-                const YYYY = date.getFullYear();
+            registerdCamps.map( camp => {
+                const {  _id, campName, location, startTime, endTime } = camp;
                 return (
-                    <li>
-                        <h3>{webinar_name}</h3>
-                        <p>Issue Date: {DD}-{MM}-{YYYY}</p>
-                        <a href={certiDirect}>
-                            <img src={certiLink} height="160" width="240" />
-                        </a>
-                    </li>    
+                  <div  key={_id}   id="content">
+                  <div className="camp-card">
+                      <div className="content">
+                        <h3>{campName}</h3>
+                        <p>Location: {location}</p>
+                        <p>Start Date: {new Date(startTime).toLocaleDateString('en-IN')}</p>
+                        <p>End Date: {new Date(endTime).toLocaleDateString('en-IN')}</p>
+                        <div className="card-footer">
+                          <button>Be Helping One <span>&rarr;</span></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 );
-            })
-        }
+              })
+            }
     </div>
     );
 };

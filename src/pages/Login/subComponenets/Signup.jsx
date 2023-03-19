@@ -19,7 +19,7 @@ export default function Signup() {
     {value: "O-", label: "O-"},
   ]);
   const [medicalOptions] = useState([
-    {value: null, label: "None"},
+    {value: "None", label: "None"},
     {value: "AIDS", label: "AIDS"},
     {value: "DAIBETES", label: "DAIBETES"},
   ])
