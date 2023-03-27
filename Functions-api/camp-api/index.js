@@ -152,8 +152,8 @@ async function sendMail( camp ) {
     port: 465,
     secure: true, 
     auth: {
-      user: "222navjot@gmail.com",
-      pass: `frnvbktttzmevbat`
+      user: "process.env.email",
+      pass: `process.env.password`
     }
   });
 
@@ -179,8 +179,8 @@ async function sendMailNoti( msg ) { ;
     port: 465,
     secure: true, 
     auth: {
-      user: "222navjot@gmail.com",
-      pass: `frnvbktttzmevbat`
+      user: "process.env.email",
+      pass: `process.env.password`
     }
   });
 
